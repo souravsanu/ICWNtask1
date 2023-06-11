@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Frontend Example</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      button {
+        margin-top: 8px;
+      }
+    </style>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // Define the editable cell component
+      function EditableCell({ value, onChange }) {
+        const handleChange = (event) => {
+          onChange(event.target.value);
+        };
+
+        return <input type="text" value={value} onChange={handleChange} />;
+      }
+
+      // Define the table component
+      function Table() {
+        const [rows, setRows] = React.useState([
+          ["Onboarding Call", "", "", "", "", "", ""],
+          ["Google Search Console Access", "", "", "", "", "", ""],
+          ["Goohgle Analytics Access", "", "", "", "", "", ""],
+          ["Website access", "", "", "", "", "", ""],
+          ["Technical Audit", "", "", "", "", "", ""],
+          ["Anchor Text and Semantic Analysis", "", "", "", "", "", ""],
+          ["Competitotor Analysis", "", "", "", "", "", ""],
+          ["Anchor / URL Mapping", "", "", "", "", "", ""],
+          [
+            "Google Data Studio Report + Local Reporting suite",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+          ],
+          ["Site Level Optimization", "", "", "", "", "", ""],
+          ["On Page Optimization", "", "", "", "", "", ""],
+          ["Content Creation", "", "", "", "", "", ""],
+          ["Content Publishing", "", "", "", "", "", ""],
+          ["Premium Press Release", "", "", "", "", "", ""],
+          ["Authority Niche Placements", "", "", "", "", "", ""],
+          ["Review Management", "", "", "", "", "", ""],
+          ["Index Links", "", "", "", "", "", ""],
+          ["Video Recap", "", "", "", "", "", ""],
+          // Add more rows as needed
+        ]);
+
+        const handleChange = (rowIndex, colIndex, value) => {
+          const updatedRows = [...rows];
+          updatedRows[rowIndex][colIndex] = value;
+          setRows(updatedRows);
+        };
+
+        const handleSubmit = (event) => {
+          event.preventDefault();
+          // Here you can make an API request to send the data
+          // For demonstration purposes, let's just log the rows array
+          console.log(rows);
+        };
+
+        return (
+          <form onSubmit={handleSubmit}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Month 1</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {row.map((cell, colIndex) => {
+                      // Generate a unique key for each input element
+                      const uniqueKey = `cell-${rowIndex}-${colIndex}`;
+
+                      return (
+                        <td key={colIndex}>
+                          <EditableCell
+                            value={cell}
+                            onChange={(value) =>
+                              handleChange(rowIndex, colIndex, value)
+                            }
+                          />
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <button type="submit">Submit</button>
+          </form>
+        );
+      }
+
+      // Render the table component
+      ReactDOM.render(<Table />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
