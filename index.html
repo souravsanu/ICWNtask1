@@ -39,7 +39,6 @@
     <div id="root"></div>
 
     <script type="text/babel">
-      // Define the editable cell component
       function EditableCell({ value, onChange }) {
         const handleChange = (event) => {
           onChange(event.target.value);
@@ -48,7 +47,6 @@
         return <input type="text" value={value} onChange={handleChange} />;
       }
 
-      // Define the table component
       function Table() {
         const [rows, setRows] = React.useState([
           ["Onboarding Call", "", "", "", "", "", ""],
@@ -77,7 +75,6 @@
           ["Review Management", "", "", "", "", "", ""],
           ["Index Links", "", "", "", "", "", ""],
           ["Video Recap", "", "", "", "", "", ""],
-          // Add more rows as needed
         ]);
 
         const handleChange = (rowIndex, colIndex, value) => {
@@ -88,8 +85,7 @@
 
         const handleSubmit = (event) => {
           event.preventDefault();
-          // Here you can make an API request to send the data
-          // For demonstration purposes, let's just log the rows array
+
           console.log(rows);
         };
 
@@ -105,7 +101,6 @@
                 {rows.map((row, rowIndex) => (
                   <tr key={rowIndex}>
                     {row.map((cell, colIndex) => {
-                      // Generate a unique key for each input element
                       const uniqueKey = `cell-${rowIndex}-${colIndex}`;
 
                       return (
@@ -128,7 +123,6 @@
         );
       }
 
-      // Render the table component
       ReactDOM.render(<Table />, document.getElementById("root"));
     </script>
   </body>
